@@ -60,6 +60,8 @@ class ScreenAnnotator(
         self.start_x = self.start_y = 0
         self.selected_item = None
         self.selection_box = None
+        self.resize_handles = []
+        self.resize_handle = None
         self.selected_orig_coords = None
         self.drag_data = {"x": 0, "y": 0}
 

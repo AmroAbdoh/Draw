@@ -57,14 +57,14 @@ class AnnotatorUIMixin:
         self.toolbar.geometry("+30+30")
         self.toolbar.config(bg="#1e1e1e")
 
-        frame = tk.Frame(self.toolbar, bg="#1e1e1e", padx=10, pady=10)
+        frame = tk.Frame(self.toolbar, bg="#1e1e1e", padx=8, pady=6)
         frame.pack()
 
         handle = tk.Label(
             frame, text="\u2637 drag", bg="#1e1e1e", fg="#888888",
-            cursor="fleur", font=("Segoe UI", 10),
+            cursor="fleur", font=("Segoe UI", 9),
         )
-        handle.grid(row=0, column=0, sticky="w", pady=(0, 6))
+        handle.grid(row=0, column=0, sticky="w", pady=(0, 3))
         handle.bind("<ButtonPress-1>", self._start_move_toolbar)
         handle.bind("<B1-Motion>", self._do_move_toolbar)
 
@@ -78,36 +78,36 @@ class AnnotatorUIMixin:
 
         tk.Label(
             frame, text=mode_text, bg="#1e1e1e", fg=mode_color, font=("Segoe UI", 7)
-        ).grid(row=1, column=0, columnspan=2, sticky="ew", pady=(0, 5))
+        ).grid(row=1, column=0, columnspan=2, sticky="ew", pady=(0, 3))
 
-        btn_font = ("Segoe UI", 11, "bold")
+        btn_font = ("Segoe UI", 9, "bold")
         for idx, (label, name, tooltip) in enumerate(self.TOOLS_GRID):
             row = 2 + idx // 2
             col = idx % 2
             btn = tk.Button(
-                frame, text=label, width=9, height=2, font=btn_font,
+                frame, text=label, width=8, height=1, font=btn_font,
                 bg="#2b2b2b", fg="white", relief="raised",
                 activebackground="#3a3a3a",
                 command=self._make_tool_command(name),
             )
-            btn.grid(row=row, column=col, padx=3, pady=3, sticky="ew")
+            btn.grid(row=row, column=col, padx=2, pady=2, sticky="ew")
             self.tool_buttons[name] = btn
 
         last_row = 2 + (len(self.TOOLS_GRID) - 1) // 2
         save_btn = tk.Button(
-            frame, text="Save PNG", width=20, height=1, font=btn_font,
+            frame, text="Save PNG", width=16, height=1, font=btn_font,
             bg="#2b2b2b", fg="white", relief="raised",
             activebackground="#3a3a3a", command=self.save_image,
         )
-        save_btn.grid(row=last_row + 1, column=0, columnspan=2, sticky="ew", pady=(6, 0))
+        save_btn.grid(row=last_row + 1, column=0, columnspan=2, sticky="ew", pady=(3, 0))
 
         tk.Label(
-            frame, text="SIZE", bg="#1e1e1e", fg="#3a7bd5", font=("Segoe UI", 11, "bold")
-        ).grid(row=last_row + 2, column=0, columnspan=2, pady=(12, 0))
+            frame, text="SIZE", bg="#1e1e1e", fg="#3a7bd5", font=("Segoe UI", 9, "bold")
+        ).grid(row=last_row + 2, column=0, columnspan=2, pady=(5, 0))
         self.size_slider = tk.Scale(
             frame, from_=1, to=50, orient="horizontal",
             command=self.set_size, bg="#1e1e1e", fg="white",
-            highlightthickness=0, troughcolor="#3a3a3a", length=200,
+            highlightthickness=0, troughcolor="#3a3a3a", length=160,
         )
         self.size_slider.set(self.size)
         self.size_slider.grid(row=last_row + 3, column=0, columnspan=2, sticky="ew")

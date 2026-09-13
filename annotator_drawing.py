@@ -47,7 +47,8 @@ class AnnotatorDrawingMixin:
         elif self.tool == "text":
             self.add_text(x, y)
         elif self.tool == "select":
-            self.select_at(x, y)
+            if not self._start_resize(x, y):
+                self.select_at(x, y)
 
     def on_drag(self, x, y):
         if self.tool in ("pencil", "highlighter") and self.current_item is not None:
@@ -62,12 +63,14 @@ class AnnotatorDrawingMixin:
         elif self.tool == "eraser":
             self.erase_at(x, y)
         elif self.tool == "select" and self.selected_item is not None:
-            dx = x - self.drag_data["x"]
-            dy = y - self.drag_data["y"]
-            self.canvas.move(self.selected_item, dx, dy)
-            if self.selection_box is not None:
-                self.canvas.move(self.selection_box, dx, dy)
-            self.drag_data = {"x": x, "y": y}
+            if self.resize_handle is not None:
+                self._resize_selected(x, y)
+            else:
+                dx = x - self.drag_data["x"]
+                dy = y - self.drag_data["y"]
+                self.canvas.move(self.selected_item, dx, dy)
+                self._move_selection_visuals(dx, dy)
+                self.drag_data = {"x": x, "y": y}
 
     def on_release(self, x, y):
         if self.tool in ("pencil", "highlighter", "line", "circle", "rectangle") and self.current_item is not None:
@@ -82,9 +85,6 @@ class AnnotatorDrawingMixin:
             self._push_history({"kind": "existence", "item": item, "snapshot": self._snapshot(item)})
 
         elif self.tool == "select":
-            if self.selection_box is not None:
-                self.canvas.delete(self.selection_box)
-                self.selection_box = None
             if self.selected_item is not None:
                 new_coords = self.canvas.coords(self.selected_item)
                 if new_coords != self.selected_orig_coords:
@@ -94,19 +94,30 @@ class AnnotatorDrawingMixin:
                         "from": self.selected_orig_coords,
                         "to": new_coords,
                     })
-            self.selected_item = None
-            self.selected_orig_coords = None
+                self.selected_orig_coords = new_coords
+            self.resize_handle = None
 
     def erase_at(self, x, y):
-        radius = max(14, self.size * 2)
-        found = list(self.canvas.find_overlapping(
+        radius = max(18, self.size * 3)
+        candidates = list(self.canvas.find_overlapping(
             x - radius, y - radius, x + radius, y + radius
         ))
-        if not found:
-            found = list(self.canvas.find_closest(x, y, halo=radius))
-        for item in found:
-            if "selection_box" in self.canvas.gettags(item):
-                continue
+        candidates = [
+            item for item in candidates
+            if "selection_box" not in self.canvas.gettags(item)
+            and "resize_handle" not in self.canvas.gettags(item)
+        ]
+        if candidates:
+            item = candidates[-1]
+        else:
+            nearest = self.canvas.find_closest(x, y, halo=radius)
+            item = next(
+                (candidate for candidate in reversed(nearest)
+                 if "selection_box" not in self.canvas.gettags(candidate)
+                 and "resize_handle" not in self.canvas.gettags(candidate)),
+                None,
+            )
+        if item is not None:
             snapshot = self._snapshot(item)
             self.canvas.delete(item)
             self._push_history({"kind": "existence", "item": None, "snapshot": snapshot})
@@ -132,9 +143,11 @@ class AnnotatorDrawingMixin:
         entry.bind("<Escape>", lambda e: entry.destroy())
 
     def select_at(self, x, y):
+        self._delete_selection_visuals()
         found = [
             item for item in self.canvas.find_overlapping(x - 4, y - 4, x + 4, y + 4)
             if "selection_box" not in self.canvas.gettags(item)
+            and "resize_handle" not in self.canvas.gettags(item)
         ]
         if not found:
             self.selected_item = None
@@ -145,11 +158,73 @@ class AnnotatorDrawingMixin:
         self.selected_orig_coords = self.canvas.coords(item)
         bbox = self.canvas.bbox(item)
         if bbox:
-            pad = 4
-            self.selection_box = self.canvas.create_rectangle(
-                bbox[0] - pad, bbox[1] - pad, bbox[2] + pad, bbox[3] + pad,
-                outline="#00aaff", dash=(4, 2), tags="selection_box",
+            self._create_selection_visuals(bbox)
+
+    def _create_selection_visuals(self, bbox):
+        pad = 4
+        self.selection_box = self.canvas.create_rectangle(
+            bbox[0] - pad, bbox[1] - pad, bbox[2] + pad, bbox[3] + pad,
+            outline="#00aaff", dash=(4, 2), tags="selection_box",
+        )
+        handle_size = 6
+        self.resize_handles = []
+        for hx, hy in (
+            (bbox[0], bbox[1]), (bbox[2], bbox[1]),
+            (bbox[2], bbox[3]), (bbox[0], bbox[3]),
+        ):
+            handle = self.canvas.create_rectangle(
+                hx - handle_size, hy - handle_size,
+                hx + handle_size, hy + handle_size,
+                fill="#00aaff", outline="white", tags="resize_handle",
             )
+            self.resize_handles.append(handle)
+
+    def _delete_selection_visuals(self):
+        if self.selection_box is not None:
+            self.canvas.delete(self.selection_box)
+            self.selection_box = None
+        for handle in self.resize_handles:
+            self.canvas.delete(handle)
+        self.resize_handles = []
+        self.resize_handle = None
+
+    def _move_selection_visuals(self, dx, dy):
+        if self.selection_box is not None:
+            self.canvas.move(self.selection_box, dx, dy)
+        for handle in self.resize_handles:
+            self.canvas.move(handle, dx, dy)
+
+    def _start_resize(self, x, y):
+        if self.selected_item is None:
+            return False
+        for handle in self.resize_handles:
+            if handle in self.canvas.find_overlapping(x, y, x, y):
+                self.resize_handle = handle
+                self.selected_orig_coords = self.canvas.coords(self.selected_item)
+                self.drag_data = {"x": x, "y": y}
+                return True
+        return False
+
+    def _resize_selected(self, x, y):
+        bbox = self.canvas.bbox(self.selected_item)
+        if not bbox:
+            return
+        handle_index = self.resize_handles.index(self.resize_handle)
+        anchors = (
+            (bbox[2], bbox[3]), (bbox[0], bbox[3]),
+            (bbox[0], bbox[1]), (bbox[2], bbox[1]),
+        )
+        anchor_x, anchor_y = anchors[handle_index]
+        width = max(2, abs(x - anchor_x))
+        height = max(2, abs(y - anchor_y))
+        scale_x = width / max(1, bbox[2] - bbox[0])
+        scale_y = height / max(1, bbox[3] - bbox[1])
+        self.canvas.scale(self.selected_item, anchor_x, anchor_y, scale_x, scale_y)
+        self._delete_selection_visuals()
+        new_bbox = self.canvas.bbox(self.selected_item)
+        if new_bbox:
+            self._create_selection_visuals(new_bbox)
+            self.resize_handle = self.resize_handles[handle_index]
 
     def _snapshot(self, item):
         item_type = self.canvas.type(item)
