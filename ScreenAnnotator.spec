@@ -5,7 +5,7 @@ a = Analysis(
     ['screen_annotator.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('icons', 'icons')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

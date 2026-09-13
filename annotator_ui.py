@@ -1,10 +1,57 @@
 """Tkinter overlay and toolbar UI for the screen annotator."""
 
+import os
+import sys
 import tkinter as tk
 from tkinter import colorchooser
 
+from PIL import Image, ImageOps, ImageTk
+
 
 class AnnotatorUIMixin:
+    TOOL_LABELS = {
+        "pencil": "Pen", "highlighter": "Highlight", "eraser": "Eraser",
+        "pointer": "Cursor", "rectangle": "Rectangle", "select": "Move",
+        "circle": "Circle", "undo": "Undo", "redo": "Redo",
+        "clear": "Clear", "hide": "Hide",
+    }
+
+    def _load_tool_icons(self):
+        icon_dir = os.path.join(getattr(sys, "_MEIPASS", os.path.dirname(__file__)), "icons")
+        icon_files = {
+            "pencil": "pen.png",
+            "highlighter": "highlighter.png",
+            "eraser": "eraser.png",
+            "pointer": "cursor.png",
+            "rectangle": "rectangle.png",
+            "select": "move.png",
+            "circle": "circle.png",
+            "undo": "undo.png",
+            "redo": "undo.png",
+            "clear": "clear.png",
+            "hide": "hide.png",
+            "line" : "line.png"
+        }
+        self.tool_icons = {}
+        for name, filename in icon_files.items():
+            path = os.path.join(icon_dir, filename)
+            if not os.path.exists(path):
+                continue
+            try:
+                # Load the icon exactly as it is on disk - no recoloring,
+                # no alpha reconstruction. This is intentionally the
+                # simplest possible path: resize it and use it as-is.
+                # If the icon's own colors are hard to see against the
+                # dark toolbar, that's a much easier follow-up fix than
+                # the garbled/blank icons the recoloring code was causing.
+                icon = Image.open(path).convert("RGBA")
+                icon.thumbnail((20, 20), Image.Resampling.LANCZOS)
+                if name == "redo":
+                    icon = ImageOps.mirror(icon)
+                self.tool_icons[name] = ImageTk.PhotoImage(icon)
+            except Exception as e:
+                print(f"[screen_annotator] could not load icon '{filename}': {e}")
+
     def _build_overlay(self):
         self.overlay = tk.Toplevel(self.root)
         self.overlay.overrideredirect(True)
@@ -59,6 +106,7 @@ class AnnotatorUIMixin:
 
         frame = tk.Frame(self.toolbar, bg="#1e1e1e", padx=8, pady=6)
         frame.pack()
+        self._load_tool_icons()
 
         handle = tk.Label(
             frame, text="\u2637 drag", bg="#1e1e1e", fg="#888888",
@@ -81,16 +129,33 @@ class AnnotatorUIMixin:
         ).grid(row=1, column=0, columnspan=2, sticky="ew", pady=(0, 3))
 
         btn_font = ("Segoe UI", 9, "bold")
+        BTN_W, BTN_H = 100, 48  # fixed pixel size for every tool button
         for idx, (label, name, tooltip) in enumerate(self.TOOLS_GRID):
             row = 2 + idx // 2
             col = idx % 2
+            icon = self.tool_icons.get(name)
+            display_label = "" if icon else self.TOOL_LABELS.get(name, label)
+
+            # A Button's width/height mean "characters" normally, but
+            # silently switch to "pixels" the moment an image is attached -
+            # even with compound="top". That mismatch is what made icon
+            # buttons and text buttons come out different sizes. Wrapping
+            # each button in a fixed-pixel holder frame sidesteps the whole
+            # units problem and guarantees every button is identical.
+            holder = tk.Frame(frame, width=BTN_W, height=BTN_H, bg="#1e1e1e")
+            holder.grid(row=row, column=col, padx=2, pady=2, sticky="nsew")
+            holder.grid_propagate(False)
+
             btn = tk.Button(
-                frame, text=label, width=8, height=1, font=btn_font,
+                holder, text=display_label, font=btn_font,
                 bg="#2b2b2b", fg="white", relief="raised",
                 activebackground="#3a3a3a",
+                image=icon, compound="none" if icon else "none",
                 command=self._make_tool_command(name),
             )
-            btn.grid(row=row, column=col, padx=2, pady=2, sticky="ew")
+            btn.pack(fill="both", expand=True)
+            if icon:
+                self._add_tooltip(btn, self.TOOL_LABELS.get(name, label))
             self.tool_buttons[name] = btn
 
         last_row = 2 + (len(self.TOOLS_GRID) - 1) // 2
@@ -100,7 +165,6 @@ class AnnotatorUIMixin:
             activebackground="#3a3a3a", command=self.save_image,
         )
         save_btn.grid(row=last_row + 1, column=0, columnspan=2, sticky="ew", pady=(3, 0))
-
         tk.Label(
             frame, text="SIZE", bg="#1e1e1e", fg="#3a7bd5", font=("Segoe UI", 9, "bold")
         ).grid(row=last_row + 2, column=0, columnspan=2, pady=(5, 0))
@@ -111,6 +175,29 @@ class AnnotatorUIMixin:
         )
         self.size_slider.set(self.size)
         self.size_slider.grid(row=last_row + 3, column=0, columnspan=2, sticky="ew")
+
+    def _add_tooltip(self, widget, text):
+        widget.bind("<Enter>", lambda event: self._show_tooltip(widget, text))
+        widget.bind("<Leave>", lambda event: self._hide_tooltip())
+
+    def _show_tooltip(self, widget, text):
+        self._hide_tooltip()
+        self.tooltip = tk.Toplevel(widget)
+        self.tooltip.overrideredirect(True)
+        self.tooltip.attributes("-topmost", True)
+        tk.Label(
+            self.tooltip, text=text, bg="#111111", fg="white",
+            padx=6, pady=3, font=("Segoe UI", 8),
+        ).pack()
+        x = widget.winfo_rootx() + widget.winfo_width() + 6
+        y = widget.winfo_rooty()
+        self.tooltip.geometry(f"+{x}+{y}")
+
+    def _hide_tooltip(self):
+        tooltip = getattr(self, "tooltip", None)
+        if tooltip is not None:
+            tooltip.destroy()
+            self.tooltip = None
 
     def _start_move_toolbar(self, event):
         self._tb_offset = (event.x, event.y)

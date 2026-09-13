@@ -1,0 +1,29 @@
+# --- PyInstaller build output (regenerated every build, don't commit) ---
+build/
+dist/
+
+# --- Python cache/bytecode ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Virtual environments (if you ever create one for this project) ---
+venv/
+.venv/
+env/
+
+# --- Editor/IDE junk ---
+.vscode/
+.idea/
+
+# --- OS junk ---
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# --- App-generated local files (NOT source code, created at runtime) ---
+# If annotator_settings.py writes a settings/config file to disk, ignore
+# it here so your personal color/size preferences don't get committed.
+# Update this filename to match whatever it actually writes.
+settings.json
