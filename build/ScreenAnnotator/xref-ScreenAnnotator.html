@@ -96,6 +96,8 @@ imports:
  &#8226;   <a href="#annotator_config">annotator_config</a>
  &#8226;   <a href="#annotator_drawing">annotator_drawing</a>
  &#8226;   <a href="#annotator_input">annotator_input</a>
+ &#8226;   <a href="#annotator_settings">annotator_settings</a>
+ &#8226;   <a href="#annotator_tray">annotator_tray</a>
  &#8226;   <a href="#annotator_ui">annotator_ui</a>
  &#8226;   <a href="#codecs">codecs</a>
  &#8226;   <a href="#collections">collections</a>
@@ -252,6 +254,7 @@ imports:
  &#8226;   <a href="#sre_parse">sre_parse</a>
  &#8226;   <a href="#stat">stat</a>
  &#8226;   <a href="#sys">sys</a>
+ &#8226;   <a href="#threading">threading</a>
  &#8226;   <a href="#tkinter">tkinter</a>
  &#8226;   <a href="#tkinter.messagebox">tkinter.messagebox</a>
  &#8226;   <a href="#traceback">traceback</a>
@@ -282,6 +285,7 @@ imported by:
 imported by:
     <a href="#pynput._util.xorg">pynput._util.xorg</a>
  &#8226;   <a href="#pynput.keyboard._xorg">pynput.keyboard._xorg</a>
+ &#8226;   <a href="#pystray._xorg">pystray._xorg</a>
 
   </div>
 
@@ -292,7 +296,8 @@ imported by:
   <a target="code" href="" type="text/plain"><tt>'Xlib.display'</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
-    <a href="#pynput.keyboard._xorg">pynput.keyboard._xorg</a>
+    <a href="#pynput._util.xorg">pynput._util.xorg</a>
+ &#8226;   <a href="#pynput.keyboard._xorg">pynput.keyboard._xorg</a>
  &#8226;   <a href="#pynput.mouse._xorg">pynput.mouse._xorg</a>
 
   </div>
@@ -341,6 +346,7 @@ imported by:
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
     <a href="#pynput._util.xorg">pynput._util.xorg</a>
+ &#8226;   <a href="#pystray._xorg">pystray._xorg</a>
 
   </div>
 
@@ -352,6 +358,7 @@ imported by:
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
     <a href="#PIL.Image">PIL.Image</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
  &#8226;   <a href="#PIL.ImageFilter">PIL.ImageFilter</a>
  &#8226;   <a href="#PIL.ImageOps">PIL.ImageOps</a>
  &#8226;   <a href="#PIL.ImagePalette">PIL.ImagePalette</a>
@@ -393,6 +400,20 @@ imported by:
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
     <a href="#pynput.keyboard._uinput">pynput.keyboard._uinput</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="'gi.repository'"></a>
+  <a target="code" href="" type="text/plain"><tt>'gi.repository'</tt></a>
+<span class="moduletype">MissingModule</span>  <div class="import">
+imported by:
+    <a href="#pystray._appindicator">pystray._appindicator</a>
+ &#8226;   <a href="#pystray._gtk">pystray._gtk</a>
+ &#8226;   <a href="#pystray._util.gtk">pystray._util.gtk</a>
+ &#8226;   <a href="#pystray._util.notify_dbus">pystray._util.notify_dbus</a>
 
   </div>
 
@@ -448,6 +469,7 @@ imported by:
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
     <a href="#pynput.mouse._darwin">pynput.mouse._darwin</a>
+ &#8226;   <a href="#pystray._darwin">pystray._darwin</a>
 
   </div>
 
@@ -459,6 +481,17 @@ imported by:
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
     <a href="#pynput._util.darwin">pynput._util.darwin</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="Foundation"></a>
+  <a target="code" href="" type="text/plain"><tt>Foundation</tt></a>
+<span class="moduletype">MissingModule</span>  <div class="import">
+imported by:
+    <a href="#pystray._darwin">pystray._darwin</a>
 
   </div>
 
@@ -490,12 +523,16 @@ imports:
  &#8226;   <a href="#PIL.ImageChops">PIL.ImageChops</a>
  &#8226;   <a href="#PIL.ImageCms">PIL.ImageCms</a>
  &#8226;   <a href="#PIL.ImageColor">PIL.ImageColor</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
+ &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
  &#8226;   <a href="#PIL.ImageFilter">PIL.ImageFilter</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageMath">PIL.ImageMath</a>
  &#8226;   <a href="#PIL.ImageMode">PIL.ImageMode</a>
  &#8226;   <a href="#PIL.ImageOps">PIL.ImageOps</a>
  &#8226;   <a href="#PIL.ImagePalette">PIL.ImagePalette</a>
+ &#8226;   <a href="#PIL.ImagePath">PIL.ImagePath</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
  &#8226;   <a href="#PIL.ImageSequence">PIL.ImageSequence</a>
  &#8226;   <a href="#PIL.ImageShow">PIL.ImageShow</a>
@@ -549,12 +586,16 @@ imported by:
  &#8226;   <a href="#PIL.ImageChops">PIL.ImageChops</a>
  &#8226;   <a href="#PIL.ImageCms">PIL.ImageCms</a>
  &#8226;   <a href="#PIL.ImageColor">PIL.ImageColor</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
+ &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
  &#8226;   <a href="#PIL.ImageFilter">PIL.ImageFilter</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageMath">PIL.ImageMath</a>
  &#8226;   <a href="#PIL.ImageMode">PIL.ImageMode</a>
  &#8226;   <a href="#PIL.ImageOps">PIL.ImageOps</a>
  &#8226;   <a href="#PIL.ImagePalette">PIL.ImagePalette</a>
+ &#8226;   <a href="#PIL.ImagePath">PIL.ImagePath</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
  &#8226;   <a href="#PIL.ImageSequence">PIL.ImageSequence</a>
  &#8226;   <a href="#PIL.ImageShow">PIL.ImageShow</a>
@@ -597,6 +638,7 @@ imported by:
  &#8226;   <a href="#PIL._deprecate">PIL._deprecate</a>
  &#8226;   <a href="#PIL._imaging">PIL._imaging</a>
  &#8226;   <a href="#PIL._imagingcms">PIL._imagingcms</a>
+ &#8226;   <a href="#PIL._imagingft">PIL._imagingft</a>
  &#8226;   <a href="#PIL._imagingmath">PIL._imagingmath</a>
  &#8226;   <a href="#PIL._imagingtk">PIL._imagingtk</a>
  &#8226;   <a href="#PIL._typing">PIL._typing</a>
@@ -605,6 +647,9 @@ imported by:
  &#8226;   <a href="#PIL._webp">PIL._webp</a>
  &#8226;   <a href="#PIL.features">PIL.features</a>
  &#8226;   <a href="#annotator_drawing">annotator_drawing</a>
+ &#8226;   <a href="#annotator_tray">annotator_tray</a>
+ &#8226;   <a href="#pystray._darwin">pystray._darwin</a>
+ &#8226;   <a href="#pystray._xorg">pystray._xorg</a>
 
   </div>
 
@@ -1248,11 +1293,15 @@ imported by:
  &#8226;   <a href="#PIL.ImageChops">PIL.ImageChops</a>
  &#8226;   <a href="#PIL.ImageCms">PIL.ImageCms</a>
  &#8226;   <a href="#PIL.ImageColor">PIL.ImageColor</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
+ &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
  &#8226;   <a href="#PIL.ImageFilter">PIL.ImageFilter</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageMath">PIL.ImageMath</a>
  &#8226;   <a href="#PIL.ImageOps">PIL.ImageOps</a>
  &#8226;   <a href="#PIL.ImagePalette">PIL.ImagePalette</a>
+ &#8226;   <a href="#PIL.ImagePath">PIL.ImagePath</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
  &#8226;   <a href="#PIL.ImageSequence">PIL.ImageSequence</a>
  &#8226;   <a href="#PIL.ImageShow">PIL.ImageShow</a>
@@ -1288,6 +1337,7 @@ imported by:
  &#8226;   <a href="#PIL.XpmImagePlugin">PIL.XpmImagePlugin</a>
  &#8226;   <a href="#PIL.features">PIL.features</a>
  &#8226;   <a href="#annotator_drawing">annotator_drawing</a>
+ &#8226;   <a href="#annotator_tray">annotator_tray</a>
 
   </div>
 
@@ -1359,8 +1409,65 @@ imports:
 imported by:
     <a href="#PIL">PIL</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
+ &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
  &#8226;   <a href="#PIL.ImageOps">PIL.ImageOps</a>
  &#8226;   <a href="#PIL.ImagePalette">PIL.ImagePalette</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="PIL.ImageDraw"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Roaming/Python/Python313/site-packages/PIL/ImageDraw.py" type="text/plain"><tt>PIL.ImageDraw</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#'collections.abc'">'collections.abc'</a>
+ &#8226;   <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.Image">PIL.Image</a>
+ &#8226;   <a href="#PIL.ImageColor">PIL.ImageColor</a>
+ &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
+ &#8226;   <a href="#PIL._deprecate">PIL._deprecate</a>
+ &#8226;   <a href="#PIL._typing">PIL._typing</a>
+ &#8226;   <a href="#__future__">__future__</a>
+ &#8226;   <a href="#math">math</a>
+ &#8226;   <a href="#struct">struct</a>
+ &#8226;   <a href="#types">types</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
+ &#8226;   <a href="#annotator_tray">annotator_tray</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="PIL.ImageDraw2"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Roaming/Python/Python313/site-packages/PIL/ImageDraw2.py" type="text/plain"><tt>PIL.ImageDraw2</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.Image">PIL.Image</a>
+ &#8226;   <a href="#PIL.ImageColor">PIL.ImageColor</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
+ &#8226;   <a href="#PIL.ImagePath">PIL.ImagePath</a>
+ &#8226;   <a href="#PIL._typing">PIL._typing</a>
+ &#8226;   <a href="#__future__">__future__</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
 
   </div>
 
@@ -1411,6 +1518,7 @@ imported by:
  &#8226;   <a href="#PIL.IcoImagePlugin">PIL.IcoImagePlugin</a>
  &#8226;   <a href="#PIL.ImImagePlugin">PIL.ImImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
  &#8226;   <a href="#PIL.ImageTk">PIL.ImageTk</a>
  &#8226;   <a href="#PIL.ImtImagePlugin">PIL.ImtImagePlugin</a>
@@ -1466,6 +1574,42 @@ imports:
 imported by:
     <a href="#PIL">PIL</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="PIL.ImageFont"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Roaming/Python/Python313/site-packages/PIL/ImageFont.py" type="text/plain"><tt>PIL.ImageFont</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.Image">PIL.Image</a>
+ &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
+ &#8226;   <a href="#PIL._imaging">PIL._imaging</a>
+ &#8226;   <a href="#PIL._imagingft">PIL._imagingft</a>
+ &#8226;   <a href="#PIL._typing">PIL._typing</a>
+ &#8226;   <a href="#PIL._util">PIL._util</a>
+ &#8226;   <a href="#PIL.features">PIL.features</a>
+ &#8226;   <a href="#__future__">__future__</a>
+ &#8226;   <a href="#base64">base64</a>
+ &#8226;   <a href="#enum">enum</a>
+ &#8226;   <a href="#io">io</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#packaging.version">packaging.version</a>
+ &#8226;   <a href="#sys">sys</a>
+ &#8226;   <a href="#types">types</a>
+ &#8226;   <a href="#typing">typing</a>
+ &#8226;   <a href="#warnings">warnings</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
+ &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
+ &#8226;   <a href="#PIL._imagingft">PIL._imagingft</a>
 
   </div>
 
@@ -1582,6 +1726,25 @@ imported by:
  &#8226;   <a href="#PIL.TiffImagePlugin">PIL.TiffImagePlugin</a>
  &#8226;   <a href="#PIL.XVThumbImagePlugin">PIL.XVThumbImagePlugin</a>
  &#8226;   <a href="#PIL.XpmImagePlugin">PIL.XpmImagePlugin</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="PIL.ImagePath"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Roaming/Python/Python313/site-packages/PIL/ImagePath.py" type="text/plain"><tt>PIL.ImagePath</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.Image">PIL.Image</a>
+ &#8226;   <a href="#__future__">__future__</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
 
   </div>
 
@@ -2557,6 +2720,7 @@ imported by:
     <a href="#PIL.IcnsImagePlugin">PIL.IcnsImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
  &#8226;   <a href="#PIL.ImageCms">PIL.ImageCms</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
  &#8226;   <a href="#PIL.ImageMath">PIL.ImageMath</a>
  &#8226;   <a href="#PIL.ImageMode">PIL.ImageMode</a>
@@ -2584,7 +2748,9 @@ imported by:
  &#8226;   <a href="#PIL.GifImagePlugin">PIL.GifImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
  &#8226;   <a href="#PIL.ImageFilter">PIL.ImageFilter</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.PngImagePlugin">PIL.PngImagePlugin</a>
+ &#8226;   <a href="#PIL._imagingft">PIL._imagingft</a>
 
   </div>
 
@@ -2605,6 +2771,24 @@ imports:
 imported by:
     <a href="#PIL">PIL</a>
  &#8226;   <a href="#PIL.ImageCms">PIL.ImageCms</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="PIL._imagingft"></a>
+  <tt>PIL._imagingft</tt> <span class="moduletype"><tt>C:\Users\amroa\AppData\Roaming\Python\Python313\site-packages\PIL\_imagingft.cp313-win_amd64.pyd</tt></span>  <div class="import">
+imports:
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
+ &#8226;   <a href="#PIL._imaging">PIL._imaging</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#PIL.ImageFont">PIL.ImageFont</a>
 
   </div>
 
@@ -2666,8 +2850,11 @@ imported by:
     <a href="#PIL.GifImagePlugin">PIL.GifImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
  &#8226;   <a href="#PIL.ImageCms">PIL.ImageCms</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
+ &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
  &#8226;   <a href="#PIL.ImageFilter">PIL.ImageFilter</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageTk">PIL.ImageTk</a>
  &#8226;   <a href="#PIL.MpegImagePlugin">PIL.MpegImagePlugin</a>
  &#8226;   <a href="#PIL.TiffImagePlugin">PIL.TiffImagePlugin</a>
@@ -2699,6 +2886,7 @@ imported by:
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
  &#8226;   <a href="#PIL.ImageCms">PIL.ImageCms</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
  &#8226;   <a href="#PIL.MpoImagePlugin">PIL.MpoImagePlugin</a>
  &#8226;   <a href="#PIL.PngImagePlugin">PIL.PngImagePlugin</a>
@@ -2764,7 +2952,19 @@ imports:
 imported by:
     <a href="#PIL">PIL</a>
  &#8226;   <a href="#PIL.IcnsImagePlugin">PIL.IcnsImagePlugin</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.PdfImagePlugin">PIL.PdfImagePlugin</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="PyObjCTools"></a>
+  <a target="code" href="" type="text/plain"><tt>PyObjCTools</tt></a>
+<span class="moduletype">MissingModule</span>  <div class="import">
+imported by:
+    <a href="#pystray._darwin">pystray._darwin</a>
 
   </div>
 
@@ -2799,7 +2999,7 @@ imported by:
   <a target="code" href="" type="text/plain"><tt>Xlib</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
-    <a href="#pynput._util.xorg">pynput._util.xorg</a>
+    <a href="#pystray._xorg">pystray._xorg</a>
 
   </div>
 
@@ -2837,12 +3037,16 @@ imported by:
  &#8226;   <a href="#PIL.ImageChops">PIL.ImageChops</a>
  &#8226;   <a href="#PIL.ImageCms">PIL.ImageCms</a>
  &#8226;   <a href="#PIL.ImageColor">PIL.ImageColor</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
+ &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
  &#8226;   <a href="#PIL.ImageFilter">PIL.ImageFilter</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageMath">PIL.ImageMath</a>
  &#8226;   <a href="#PIL.ImageMode">PIL.ImageMode</a>
  &#8226;   <a href="#PIL.ImageOps">PIL.ImageOps</a>
  &#8226;   <a href="#PIL.ImagePalette">PIL.ImagePalette</a>
+ &#8226;   <a href="#PIL.ImagePath">PIL.ImagePath</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
  &#8226;   <a href="#PIL.ImageSequence">PIL.ImageSequence</a>
  &#8226;   <a href="#PIL.ImageShow">PIL.ImageShow</a>
@@ -2907,6 +3111,7 @@ imported by:
  &#8226;   <a href="#numpy._typing._nested_sequence">numpy._typing._nested_sequence</a>
  &#8226;   <a href="#numpy.f2py._backends._backend">numpy.f2py._backends._backend</a>
  &#8226;   <a href="#numpy.f2py._backends._meson">numpy.f2py._backends._meson</a>
+ &#8226;   <a href="#packaging.version">packaging.version</a>
  &#8226;   <a href="#pydoc">pydoc</a>
  &#8226;   <a href="#six">six</a>
 
@@ -4112,6 +4317,43 @@ imported by:
 </div>
 
 <div class="node">
+  <a name="annotator_settings"></a>
+  <a target="code" href="///C:/Users/amroa/OneDrive/Desktop/ProgrammingTest/Draw/annotator_settings.py" type="text/plain"><tt>annotator_settings</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#json">json</a>
+ &#8226;   <a href="#os">os</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#screen_annotator.py">screen_annotator.py</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="annotator_tray"></a>
+  <a target="code" href="///C:/Users/amroa/OneDrive/Desktop/ProgrammingTest/Draw/annotator_tray.py" type="text/plain"><tt>annotator_tray</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.Image">PIL.Image</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
+ &#8226;   <a href="#pystray">pystray</a>
+ &#8226;   <a href="#threading">threading</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#screen_annotator.py">screen_annotator.py</a>
+
+  </div>
+
+</div>
+
+<div class="node">
   <a name="annotator_ui"></a>
   <a target="code" href="///C:/Users/amroa/OneDrive/Desktop/ProgrammingTest/Draw/annotator_ui.py" type="text/plain"><tt>annotator_ui</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
@@ -5165,6 +5407,8 @@ imported by:
  &#8226;   <a href="#multiprocessing.forkserver">multiprocessing.forkserver</a>
  &#8226;   <a href="#multiprocessing.popen_fork">multiprocessing.popen_fork</a>
  &#8226;   <a href="#multiprocessing.util">multiprocessing.util</a>
+ &#8226;   <a href="#pystray._util.gtk">pystray._util.gtk</a>
+ &#8226;   <a href="#pystray._util.notify_dbus">pystray._util.notify_dbus</a>
  &#8226;   <a href="#rlcompleter">rlcompleter</a>
  &#8226;   <a href="#weakref">weakref</a>
 
@@ -5186,7 +5430,8 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#email._encoded_words">email._encoded_words</a>
+    <a href="#PIL.ImageFont">PIL.ImageFont</a>
+ &#8226;   <a href="#email._encoded_words">email._encoded_words</a>
  &#8226;   <a href="#email.base64mime">email.base64mime</a>
  &#8226;   <a href="#email.encoders">email.encoders</a>
  &#8226;   <a href="#encodings.base64_codec">encodings.base64_codec</a>
@@ -6048,6 +6293,8 @@ imported by:
  &#8226;   <a href="#pynput._util.xorg">pynput._util.xorg</a>
  &#8226;   <a href="#pynput.keyboard._base">pynput.keyboard._base</a>
  &#8226;   <a href="#pynput.keyboard._win32">pynput.keyboard._win32</a>
+ &#8226;   <a href="#pystray._util">pystray._util</a>
+ &#8226;   <a href="#pystray._xorg">pystray._xorg</a>
  &#8226;   <a href="#subprocess">subprocess</a>
  &#8226;   <a href="#traceback">traceback</a>
  &#8226;   <a href="#typing">typing</a>
@@ -6201,6 +6448,8 @@ imported by:
  &#8226;   <a href="#pynput._util.win32">pynput._util.win32</a>
  &#8226;   <a href="#pynput.keyboard._win32">pynput.keyboard._win32</a>
  &#8226;   <a href="#pynput.mouse._win32">pynput.mouse._win32</a>
+ &#8226;   <a href="#pystray._util.win32">pystray._util.win32</a>
+ &#8226;   <a href="#pystray._win32">pystray._win32</a>
  &#8226;   <a href="#webbrowser">webbrowser</a>
 
   </div>
@@ -6359,6 +6608,8 @@ imported by:
  &#8226;   <a href="#pynput._util.win32">pynput._util.win32</a>
  &#8226;   <a href="#pynput.keyboard._win32">pynput.keyboard._win32</a>
  &#8226;   <a href="#pynput.mouse._win32">pynput.mouse._win32</a>
+ &#8226;   <a href="#pystray._util.win32">pystray._util.win32</a>
+ &#8226;   <a href="#pystray._win32">pystray._win32</a>
 
   </div>
 
@@ -9524,6 +9775,7 @@ imported by:
  &#8226;   <a href="#PIL.GifImagePlugin">PIL.GifImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
  &#8226;   <a href="#PIL.ImageCms">PIL.ImageCms</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.PngImagePlugin">PIL.PngImagePlugin</a>
  &#8226;   <a href="#ast">ast</a>
  &#8226;   <a href="#asyncio.constants">asyncio.constants</a>
@@ -9796,6 +10048,9 @@ imported by:
  &#8226;   <a href="#pynput._util">pynput._util</a>
  &#8226;   <a href="#pynput._util.xorg">pynput._util.xorg</a>
  &#8226;   <a href="#pynput.keyboard._uinput">pynput.keyboard._uinput</a>
+ &#8226;   <a href="#pystray._base">pystray._base</a>
+ &#8226;   <a href="#pystray._util.gtk">pystray._util.gtk</a>
+ &#8226;   <a href="#pystray._xorg">pystray._xorg</a>
  &#8226;   <a href="#re">re</a>
  &#8226;   <a href="#screen_annotator.py">screen_annotator.py</a>
  &#8226;   <a href="#six">six</a>
@@ -9919,6 +10174,20 @@ imports:
 imported by:
     <a href="#argparse">argparse</a>
  &#8226;   <a href="#getopt">getopt</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="gi"></a>
+  <a target="code" href="" type="text/plain"><tt>gi</tt></a>
+<span class="moduletype">MissingModule</span>  <div class="import">
+imported by:
+    <a href="#pystray._appindicator">pystray._appindicator</a>
+ &#8226;   <a href="#pystray._gtk">pystray._gtk</a>
+ &#8226;   <a href="#pystray._util.gtk">pystray._util.gtk</a>
+ &#8226;   <a href="#pystray._util.notify_dbus">pystray._util.notify_dbus</a>
 
   </div>
 
@@ -10798,6 +11067,7 @@ imported by:
  &#8226;   <a href="#pydoc">pydoc</a>
  &#8226;   <a href="#pyi_rth_inspect.py">pyi_rth_inspect.py</a>
  &#8226;   <a href="#pynput._util">pynput._util</a>
+ &#8226;   <a href="#pystray._base">pystray._base</a>
  &#8226;   <a href="#rlcompleter">rlcompleter</a>
  &#8226;   <a href="#typing">typing</a>
  &#8226;   <a href="#typing_extensions">typing_extensions</a>
@@ -10830,6 +11100,7 @@ imported by:
  &#8226;   <a href="#PIL.IcoImagePlugin">PIL.IcoImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
  &#8226;   <a href="#PIL.ImageTk">PIL.ImageTk</a>
  &#8226;   <a href="#PIL.IptcImagePlugin">PIL.IptcImagePlugin</a>
@@ -10880,6 +11151,7 @@ imported by:
  &#8226;   <a href="#pickle">pickle</a>
  &#8226;   <a href="#pprint">pprint</a>
  &#8226;   <a href="#pydoc">pydoc</a>
+ &#8226;   <a href="#pystray._darwin">pystray._darwin</a>
  &#8226;   <a href="#quopri">quopri</a>
  &#8226;   <a href="#runpy">runpy</a>
  &#8226;   <a href="#screen_annotator.py">screen_annotator.py</a>
@@ -10965,6 +11237,7 @@ imported by:
  &#8226;   <a href="#numpy.lib._npyio_impl">numpy.lib._npyio_impl</a>
  &#8226;   <a href="#numpy.lib.recfunctions">numpy.lib.recfunctions</a>
  &#8226;   <a href="#numpy.ma.extras">numpy.ma.extras</a>
+ &#8226;   <a href="#packaging.version">packaging.version</a>
  &#8226;   <a href="#pathlib._local">pathlib._local</a>
  &#8226;   <a href="#pdb">pdb</a>
  &#8226;   <a href="#pickle">pickle</a>
@@ -10972,6 +11245,7 @@ imported by:
  &#8226;   <a href="#pynput._util.win32">pynput._util.win32</a>
  &#8226;   <a href="#pynput._util.xorg">pynput._util.xorg</a>
  &#8226;   <a href="#pynput.keyboard">pynput.keyboard</a>
+ &#8226;   <a href="#pystray._base">pystray._base</a>
  &#8226;   <a href="#random">random</a>
  &#8226;   <a href="#reprlib">reprlib</a>
  &#8226;   <a href="#six">six</a>
@@ -11010,7 +11284,8 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#charset_normalizer.models">charset_normalizer.models</a>
+    <a href="#annotator_settings">annotator_settings</a>
+ &#8226;   <a href="#charset_normalizer.models">charset_normalizer.models</a>
  &#8226;   <a href="#importlib.metadata">importlib.metadata</a>
  &#8226;   <a href="#json.decoder">json.decoder</a>
  &#8226;   <a href="#json.encoder">json.encoder</a>
@@ -11191,6 +11466,7 @@ imported by:
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
  &#8226;   <a href="#multiprocessing.util">multiprocessing.util</a>
  &#8226;   <a href="#pynput">pynput</a>
+ &#8226;   <a href="#pystray._base">pystray._base</a>
  &#8226;   <a href="#unittest._log">unittest._log</a>
 
   </div>
@@ -11241,6 +11517,7 @@ imported by:
  &#8226;   <a href="#PIL.GimpGradientFile">PIL.GimpGradientFile</a>
  &#8226;   <a href="#PIL.IcoImagePlugin">PIL.IcoImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
  &#8226;   <a href="#PIL.JpegImagePlugin">PIL.JpegImagePlugin</a>
  &#8226;   <a href="#PIL.PdfImagePlugin">PIL.PdfImagePlugin</a>
  &#8226;   <a href="#PIL.PpmImagePlugin">PIL.PpmImagePlugin</a>
@@ -18891,6 +19168,7 @@ imported by:
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
     <a href="#pynput._util.darwin">pynput._util.darwin</a>
+ &#8226;   <a href="#pystray._darwin">pystray._darwin</a>
 
   </div>
 
@@ -19010,6 +19288,7 @@ imported by:
  &#8226;   <a href="#PIL.ImImagePlugin">PIL.ImImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageShow">PIL.ImageShow</a>
  &#8226;   <a href="#PIL.Jpeg2KImagePlugin">PIL.Jpeg2KImagePlugin</a>
  &#8226;   <a href="#PIL.JpegImagePlugin">PIL.JpegImagePlugin</a>
@@ -19028,6 +19307,7 @@ imported by:
  &#8226;   <a href="#_pyrepl.pager">_pyrepl.pager</a>
  &#8226;   <a href="#_strptime">_strptime</a>
  &#8226;   <a href="#annotator_drawing">annotator_drawing</a>
+ &#8226;   <a href="#annotator_settings">annotator_settings</a>
  &#8226;   <a href="#argparse">argparse</a>
  &#8226;   <a href="#asyncio.base_events">asyncio.base_events</a>
  &#8226;   <a href="#asyncio.base_subprocess">asyncio.base_subprocess</a>
@@ -19126,6 +19406,10 @@ imported by:
  &#8226;   <a href="#pyi_rth_inspect.py">pyi_rth_inspect.py</a>
  &#8226;   <a href="#pynput._util">pynput._util</a>
  &#8226;   <a href="#pynput.keyboard._uinput">pynput.keyboard._uinput</a>
+ &#8226;   <a href="#pystray">pystray</a>
+ &#8226;   <a href="#pystray._util">pystray._util</a>
+ &#8226;   <a href="#pystray._util.gtk">pystray._util.gtk</a>
+ &#8226;   <a href="#pystray._util.notify_dbus">pystray._util.notify_dbus</a>
  &#8226;   <a href="#random">random</a>
  &#8226;   <a href="#runpy">runpy</a>
  &#8226;   <a href="#screen_annotator.py">screen_annotator.py</a>
@@ -19172,6 +19456,55 @@ imported by:
  &#8226;   <a href="#sysconfig">sysconfig</a>
  &#8226;   <a href="#tracemalloc">tracemalloc</a>
  &#8226;   <a href="#unittest.util">unittest.util</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="packaging"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Local/Programs/Python/Python313/Lib/site-packages/packaging/__init__.py" type="text/plain"><tt>packaging</tt></a>
+<span class="moduletype">Package</span>  <div class="import">
+imported by:
+    <a href="#packaging._structures">packaging._structures</a>
+ &#8226;   <a href="#packaging.version">packaging.version</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="packaging._structures"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Local/Programs/Python/Python313/Lib/site-packages/packaging/_structures.py" type="text/plain"><tt>packaging._structures</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#packaging">packaging</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#packaging.version">packaging.version</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="packaging.version"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Local/Programs/Python/Python313/Lib/site-packages/packaging/version.py" type="text/plain"><tt>packaging.version</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#__future__">__future__</a>
+ &#8226;   <a href="#itertools">itertools</a>
+ &#8226;   <a href="#packaging">packaging</a>
+ &#8226;   <a href="#packaging._structures">packaging._structures</a>
+ &#8226;   <a href="#re">re</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#PIL.ImageFont">PIL.ImageFont</a>
 
   </div>
 
@@ -19940,9 +20273,9 @@ imported by:
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
     <a href="#'Xlib.XK'">'Xlib.XK'</a>
+ &#8226;   <a href="#'Xlib.display'">'Xlib.display'</a>
  &#8226;   <a href="#'Xlib.keysymdef'">'Xlib.keysymdef'</a>
  &#8226;   <a href="#'Xlib.threaded'">'Xlib.threaded'</a>
- &#8226;   <a href="#Xlib">Xlib</a>
  &#8226;   <a href="#contextlib">contextlib</a>
  &#8226;   <a href="#functools">functools</a>
  &#8226;   <a href="#itertools">itertools</a>
@@ -20286,6 +20619,325 @@ imported by:
 </div>
 
 <div class="node">
+  <a name="pystray"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Local/Programs/Python/Python313/Lib/site-packages/pystray/__init__.py" type="text/plain"><tt>pystray</tt></a>
+<span class="moduletype">Package</span>  <div class="import">
+imports:
+    <a href="#os">os</a>
+ &#8226;   <a href="#pystray">pystray</a>
+ &#8226;   <a href="#pystray._appindicator">pystray._appindicator</a>
+ &#8226;   <a href="#pystray._base">pystray._base</a>
+ &#8226;   <a href="#pystray._darwin">pystray._darwin</a>
+ &#8226;   <a href="#pystray._dummy">pystray._dummy</a>
+ &#8226;   <a href="#pystray._gtk">pystray._gtk</a>
+ &#8226;   <a href="#pystray._info">pystray._info</a>
+ &#8226;   <a href="#pystray._util">pystray._util</a>
+ &#8226;   <a href="#pystray._util.gtk">pystray._util.gtk</a>
+ &#8226;   <a href="#pystray._util.notify_dbus">pystray._util.notify_dbus</a>
+ &#8226;   <a href="#pystray._util.win32">pystray._util.win32</a>
+ &#8226;   <a href="#pystray._win32">pystray._win32</a>
+ &#8226;   <a href="#pystray._xorg">pystray._xorg</a>
+ &#8226;   <a href="#sys">sys</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#annotator_tray">annotator_tray</a>
+ &#8226;   <a href="#pystray">pystray</a>
+ &#8226;   <a href="#pystray._appindicator">pystray._appindicator</a>
+ &#8226;   <a href="#pystray._base">pystray._base</a>
+ &#8226;   <a href="#pystray._darwin">pystray._darwin</a>
+ &#8226;   <a href="#pystray._dummy">pystray._dummy</a>
+ &#8226;   <a href="#pystray._gtk">pystray._gtk</a>
+ &#8226;   <a href="#pystray._info">pystray._info</a>
+ &#8226;   <a href="#pystray._util">pystray._util</a>
+ &#8226;   <a href="#pystray._util.gtk">pystray._util.gtk</a>
+ &#8226;   <a href="#pystray._win32">pystray._win32</a>
+ &#8226;   <a href="#pystray._xorg">pystray._xorg</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pystray._appindicator"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Local/Programs/Python/Python313/Lib/site-packages/pystray/_appindicator.py" type="text/plain"><tt>pystray._appindicator</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#'gi.repository'">'gi.repository'</a>
+ &#8226;   <a href="#gi">gi</a>
+ &#8226;   <a href="#pystray">pystray</a>
+ &#8226;   <a href="#pystray._base">pystray._base</a>
+ &#8226;   <a href="#pystray._util.gtk">pystray._util.gtk</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pystray">pystray</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pystray._base"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Local/Programs/Python/Python313/Lib/site-packages/pystray/_base.py" type="text/plain"><tt>pystray._base</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#functools">functools</a>
+ &#8226;   <a href="#inspect">inspect</a>
+ &#8226;   <a href="#itertools">itertools</a>
+ &#8226;   <a href="#logging">logging</a>
+ &#8226;   <a href="#pystray">pystray</a>
+ &#8226;   <a href="#six.moves">six.moves</a>
+ &#8226;   <a href="#six.moves.queue">six.moves.queue</a>
+ &#8226;   <a href="#threading">threading</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pystray">pystray</a>
+ &#8226;   <a href="#pystray._appindicator">pystray._appindicator</a>
+ &#8226;   <a href="#pystray._darwin">pystray._darwin</a>
+ &#8226;   <a href="#pystray._dummy">pystray._dummy</a>
+ &#8226;   <a href="#pystray._util.gtk">pystray._util.gtk</a>
+ &#8226;   <a href="#pystray._win32">pystray._win32</a>
+ &#8226;   <a href="#pystray._xorg">pystray._xorg</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pystray._darwin"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Local/Programs/Python/Python313/Lib/site-packages/pystray/_darwin.py" type="text/plain"><tt>pystray._darwin</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#AppKit">AppKit</a>
+ &#8226;   <a href="#Foundation">Foundation</a>
+ &#8226;   <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PyObjCTools">PyObjCTools</a>
+ &#8226;   <a href="#io">io</a>
+ &#8226;   <a href="#objc">objc</a>
+ &#8226;   <a href="#pystray">pystray</a>
+ &#8226;   <a href="#pystray._base">pystray._base</a>
+ &#8226;   <a href="#signal">signal</a>
+ &#8226;   <a href="#subprocess">subprocess</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pystray">pystray</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pystray._dummy"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Local/Programs/Python/Python313/Lib/site-packages/pystray/_dummy.py" type="text/plain"><tt>pystray._dummy</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#pystray">pystray</a>
+ &#8226;   <a href="#pystray._base">pystray._base</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pystray">pystray</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pystray._gtk"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Local/Programs/Python/Python313/Lib/site-packages/pystray/_gtk.py" type="text/plain"><tt>pystray._gtk</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#'gi.repository'">'gi.repository'</a>
+ &#8226;   <a href="#gi">gi</a>
+ &#8226;   <a href="#pystray">pystray</a>
+ &#8226;   <a href="#pystray._util.gtk">pystray._util.gtk</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pystray">pystray</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pystray._info"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Local/Programs/Python/Python313/Lib/site-packages/pystray/_info.py" type="text/plain"><tt>pystray._info</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#pystray">pystray</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pystray">pystray</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pystray._util"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Local/Programs/Python/Python313/Lib/site-packages/pystray/_util/__init__.py" type="text/plain"><tt>pystray._util</tt></a>
+<span class="moduletype">Package</span>  <div class="import">
+imports:
+    <a href="#contextlib">contextlib</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#pystray">pystray</a>
+ &#8226;   <a href="#pystray._util">pystray._util</a>
+ &#8226;   <a href="#pystray._util.notify_dbus">pystray._util.notify_dbus</a>
+ &#8226;   <a href="#pystray._util.win32">pystray._util.win32</a>
+ &#8226;   <a href="#tempfile">tempfile</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pystray">pystray</a>
+ &#8226;   <a href="#pystray._util">pystray._util</a>
+ &#8226;   <a href="#pystray._util.gtk">pystray._util.gtk</a>
+ &#8226;   <a href="#pystray._util.notify_dbus">pystray._util.notify_dbus</a>
+ &#8226;   <a href="#pystray._util.win32">pystray._util.win32</a>
+ &#8226;   <a href="#pystray._win32">pystray._win32</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pystray._util.gtk"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Local/Programs/Python/Python313/Lib/site-packages/pystray/_util/gtk.py" type="text/plain"><tt>pystray._util.gtk</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#'gi.repository'">'gi.repository'</a>
+ &#8226;   <a href="#atexit">atexit</a>
+ &#8226;   <a href="#functools">functools</a>
+ &#8226;   <a href="#gi">gi</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#pystray">pystray</a>
+ &#8226;   <a href="#pystray._base">pystray._base</a>
+ &#8226;   <a href="#pystray._util">pystray._util</a>
+ &#8226;   <a href="#pystray._util.notify_dbus">pystray._util.notify_dbus</a>
+ &#8226;   <a href="#signal">signal</a>
+ &#8226;   <a href="#tempfile">tempfile</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pystray">pystray</a>
+ &#8226;   <a href="#pystray._appindicator">pystray._appindicator</a>
+ &#8226;   <a href="#pystray._gtk">pystray._gtk</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pystray._util.notify_dbus"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Local/Programs/Python/Python313/Lib/site-packages/pystray/_util/notify_dbus.py" type="text/plain"><tt>pystray._util.notify_dbus</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#'gi.repository'">'gi.repository'</a>
+ &#8226;   <a href="#atexit">atexit</a>
+ &#8226;   <a href="#gi">gi</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#pystray._util">pystray._util</a>
+ &#8226;   <a href="#shutil">shutil</a>
+ &#8226;   <a href="#tempfile">tempfile</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pystray">pystray</a>
+ &#8226;   <a href="#pystray._util">pystray._util</a>
+ &#8226;   <a href="#pystray._util.gtk">pystray._util.gtk</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pystray._util.win32"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Local/Programs/Python/Python313/Lib/site-packages/pystray/_util/win32.py" type="text/plain"><tt>pystray._util.win32</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#ctypes">ctypes</a>
+ &#8226;   <a href="#ctypes.wintypes">ctypes.wintypes</a>
+ &#8226;   <a href="#pystray._util">pystray._util</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pystray">pystray</a>
+ &#8226;   <a href="#pystray._util">pystray._util</a>
+ &#8226;   <a href="#pystray._win32">pystray._win32</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pystray._win32"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Local/Programs/Python/Python313/Lib/site-packages/pystray/_win32.py" type="text/plain"><tt>pystray._win32</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#ctypes">ctypes</a>
+ &#8226;   <a href="#ctypes.wintypes">ctypes.wintypes</a>
+ &#8226;   <a href="#pystray">pystray</a>
+ &#8226;   <a href="#pystray._base">pystray._base</a>
+ &#8226;   <a href="#pystray._util">pystray._util</a>
+ &#8226;   <a href="#pystray._util.win32">pystray._util.win32</a>
+ &#8226;   <a href="#six.moves">six.moves</a>
+ &#8226;   <a href="#six.moves.queue">six.moves.queue</a>
+ &#8226;   <a href="#threading">threading</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pystray">pystray</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pystray._xorg"></a>
+  <a target="code" href="///C:/Users/amroa/AppData/Local/Programs/Python/Python313/Lib/site-packages/pystray/_xorg.py" type="text/plain"><tt>pystray._xorg</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#'Xlib.XK'">'Xlib.XK'</a>
+ &#8226;   <a href="#'Xlib.threaded'">'Xlib.threaded'</a>
+ &#8226;   <a href="#PIL">PIL</a>
+ &#8226;   <a href="#Xlib">Xlib</a>
+ &#8226;   <a href="#contextlib">contextlib</a>
+ &#8226;   <a href="#functools">functools</a>
+ &#8226;   <a href="#pystray">pystray</a>
+ &#8226;   <a href="#pystray._base">pystray._base</a>
+ &#8226;   <a href="#six">six</a>
+ &#8226;   <a href="#six.moves">six.moves</a>
+ &#8226;   <a href="#six.moves.queue">six.moves.queue</a>
+ &#8226;   <a href="#sys">sys</a>
+ &#8226;   <a href="#threading">threading</a>
+ &#8226;   <a href="#types">types</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pystray">pystray</a>
+
+  </div>
+
+</div>
+
+<div class="node">
   <a name="queue"></a>
   <a target="code" href="///C:/Users/amroa/AppData/Local/Programs/Python/Python313/Lib/queue.py" type="text/plain"><tt>queue</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
@@ -20458,6 +21110,7 @@ imported by:
  &#8226;   <a href="#numpy.lib.introspect">numpy.lib.introspect</a>
  &#8226;   <a href="#numpy.ma.core">numpy.ma.core</a>
  &#8226;   <a href="#numpy.testing._private.utils">numpy.testing._private.utils</a>
+ &#8226;   <a href="#packaging.version">packaging.version</a>
  &#8226;   <a href="#pdb">pdb</a>
  &#8226;   <a href="#pickle">pickle</a>
  &#8226;   <a href="#pkgutil">pkgutil</a>
@@ -20795,6 +21448,7 @@ imported by:
  &#8226;   <a href="#numpy.f2py._backends._meson">numpy.f2py._backends._meson</a>
  &#8226;   <a href="#numpy.lib._datasource">numpy.lib._datasource</a>
  &#8226;   <a href="#numpy.testing._private.utils">numpy.testing._private.utils</a>
+ &#8226;   <a href="#pystray._util.notify_dbus">pystray._util.notify_dbus</a>
  &#8226;   <a href="#tarfile">tarfile</a>
  &#8226;   <a href="#tempfile">tempfile</a>
  &#8226;   <a href="#webbrowser">webbrowser</a>
@@ -20830,6 +21484,8 @@ imported by:
  &#8226;   <a href="#pdb">pdb</a>
  &#8226;   <a href="#psutil">psutil</a>
  &#8226;   <a href="#psutil._pswindows">psutil._pswindows</a>
+ &#8226;   <a href="#pystray._darwin">pystray._darwin</a>
+ &#8226;   <a href="#pystray._util.gtk">pystray._util.gtk</a>
  &#8226;   <a href="#subprocess">subprocess</a>
  &#8226;   <a href="#unittest.signals">unittest.signals</a>
 
@@ -20860,6 +21516,7 @@ imported by:
  &#8226;   <a href="#pynput._util.darwin">pynput._util.darwin</a>
  &#8226;   <a href="#pynput.keyboard._base">pynput.keyboard._base</a>
  &#8226;   <a href="#pynput.keyboard._win32">pynput.keyboard._win32</a>
+ &#8226;   <a href="#pystray._xorg">pystray._xorg</a>
  &#8226;   <a href="#six.moves">six.moves</a>
 
   </div>
@@ -20878,6 +21535,9 @@ imports:
   <div class="import">
 imported by:
     <a href="#pynput._util">pynput._util</a>
+ &#8226;   <a href="#pystray._base">pystray._base</a>
+ &#8226;   <a href="#pystray._win32">pystray._win32</a>
+ &#8226;   <a href="#pystray._xorg">pystray._xorg</a>
 
   </div>
 
@@ -20894,6 +21554,9 @@ imports:
   <div class="import">
 imported by:
     <a href="#pynput._util">pynput._util</a>
+ &#8226;   <a href="#pystray._base">pystray._base</a>
+ &#8226;   <a href="#pystray._win32">pystray._win32</a>
+ &#8226;   <a href="#pystray._xorg">pystray._xorg</a>
  &#8226;   <a href="#six.moves">six.moves</a>
 
   </div>
@@ -21167,6 +21830,7 @@ imported by:
  &#8226;   <a href="#PIL.FtexImagePlugin">PIL.FtexImagePlugin</a>
  &#8226;   <a href="#PIL.IcnsImagePlugin">PIL.IcnsImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
  &#8226;   <a href="#PIL.Jpeg2KImagePlugin">PIL.Jpeg2KImagePlugin</a>
  &#8226;   <a href="#PIL.JpegImagePlugin">PIL.JpegImagePlugin</a>
@@ -21255,6 +21919,7 @@ imported by:
  &#8226;   <a href="#psutil">psutil</a>
  &#8226;   <a href="#pyi_rth_multiprocessing.py">pyi_rth_multiprocessing.py</a>
  &#8226;   <a href="#pynput.keyboard._uinput">pynput.keyboard._uinput</a>
+ &#8226;   <a href="#pystray._darwin">pystray._darwin</a>
  &#8226;   <a href="#webbrowser">webbrowser</a>
 
   </div>
@@ -21270,6 +21935,7 @@ imported by:
  &#8226;   <a href="#PIL.IcnsImagePlugin">PIL.IcnsImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
  &#8226;   <a href="#PIL.ImageCms">PIL.ImageCms</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageMode">PIL.ImageMode</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
  &#8226;   <a href="#PIL.ImageShow">PIL.ImageShow</a>
@@ -21404,6 +22070,8 @@ imported by:
  &#8226;   <a href="#pyi_rth_inspect.py">pyi_rth_inspect.py</a>
  &#8226;   <a href="#pyi_rth_multiprocessing.py">pyi_rth_multiprocessing.py</a>
  &#8226;   <a href="#pynput._util">pynput._util</a>
+ &#8226;   <a href="#pystray">pystray</a>
+ &#8226;   <a href="#pystray._xorg">pystray._xorg</a>
  &#8226;   <a href="#quopri">quopri</a>
  &#8226;   <a href="#re._compiler">re._compiler</a>
  &#8226;   <a href="#runpy">runpy</a>
@@ -21549,6 +22217,9 @@ imported by:
  &#8226;   <a href="#numpy.f2py.f2py2e">numpy.f2py.f2py2e</a>
  &#8226;   <a href="#numpy.lib._datasource">numpy.lib._datasource</a>
  &#8226;   <a href="#numpy.testing._private.utils">numpy.testing._private.utils</a>
+ &#8226;   <a href="#pystray._util">pystray._util</a>
+ &#8226;   <a href="#pystray._util.gtk">pystray._util.gtk</a>
+ &#8226;   <a href="#pystray._util.notify_dbus">pystray._util.notify_dbus</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
  &#8226;   <a href="#urllib.response">urllib.response</a>
 
@@ -21615,6 +22286,7 @@ imports:
   <div class="import">
 imported by:
     <a href="#_threading_local">_threading_local</a>
+ &#8226;   <a href="#annotator_tray">annotator_tray</a>
  &#8226;   <a href="#asyncio.base_events">asyncio.base_events</a>
  &#8226;   <a href="#asyncio.events">asyncio.events</a>
  &#8226;   <a href="#asyncio.mixins">asyncio.mixins</a>
@@ -21649,7 +22321,11 @@ imported by:
  &#8226;   <a href="#pynput._util.win32">pynput._util.win32</a>
  &#8226;   <a href="#pynput.keyboard._base">pynput.keyboard._base</a>
  &#8226;   <a href="#pynput.keyboard._xorg">pynput.keyboard._xorg</a>
+ &#8226;   <a href="#pystray._base">pystray._base</a>
+ &#8226;   <a href="#pystray._win32">pystray._win32</a>
+ &#8226;   <a href="#pystray._xorg">pystray._xorg</a>
  &#8226;   <a href="#queue">queue</a>
+ &#8226;   <a href="#screen_annotator.py">screen_annotator.py</a>
  &#8226;   <a href="#socketserver">socketserver</a>
  &#8226;   <a href="#subprocess">subprocess</a>
  &#8226;   <a href="#sysconfig">sysconfig</a>
@@ -22037,7 +22713,9 @@ imports:
   <div class="import">
 imported by:
     <a href="#PIL.Image">PIL.Image</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
  &#8226;   <a href="#PIL.ImageFilter">PIL.ImageFilter</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageMath">PIL.ImageMath</a>
  &#8226;   <a href="#PIL._typing">PIL._typing</a>
  &#8226;   <a href="#_weakrefset">_weakrefset</a>
@@ -22081,6 +22759,7 @@ imported by:
  &#8226;   <a href="#pickle">pickle</a>
  &#8226;   <a href="#pkgutil">pkgutil</a>
  &#8226;   <a href="#pprint">pprint</a>
+ &#8226;   <a href="#pystray._xorg">pystray._xorg</a>
  &#8226;   <a href="#queue">queue</a>
  &#8226;   <a href="#screen_annotator.py">screen_annotator.py</a>
  &#8226;   <a href="#six">six</a>
@@ -22138,8 +22817,11 @@ imported by:
  &#8226;   <a href="#PIL.ImImagePlugin">PIL.ImImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
  &#8226;   <a href="#PIL.ImageCms">PIL.ImageCms</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
+ &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
  &#8226;   <a href="#PIL.ImageFilter">PIL.ImageFilter</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageMath">PIL.ImageMath</a>
  &#8226;   <a href="#PIL.ImageMode">PIL.ImageMode</a>
  &#8226;   <a href="#PIL.ImageOps">PIL.ImageOps</a>
@@ -22173,6 +22855,7 @@ imported by:
  &#8226;   <a href="#PIL._avif">PIL._avif</a>
  &#8226;   <a href="#PIL._imaging">PIL._imaging</a>
  &#8226;   <a href="#PIL._imagingcms">PIL._imagingcms</a>
+ &#8226;   <a href="#PIL._imagingft">PIL._imagingft</a>
  &#8226;   <a href="#PIL._imagingmath">PIL._imagingmath</a>
  &#8226;   <a href="#PIL._imagingtk">PIL._imagingtk</a>
  &#8226;   <a href="#PIL._typing">PIL._typing</a>
@@ -22212,6 +22895,7 @@ imported by:
  &#8226;   <a href="#numpy.random._sfc64">numpy.random._sfc64</a>
  &#8226;   <a href="#numpy.random.bit_generator">numpy.random.bit_generator</a>
  &#8226;   <a href="#numpy.random.mtrand">numpy.random.mtrand</a>
+ &#8226;   <a href="#packaging.version">packaging.version</a>
  &#8226;   <a href="#typing_extensions">typing_extensions</a>
 
   </div>
@@ -22708,6 +23392,7 @@ imports:
 imported by:
     <a href="#PIL.IcoImagePlugin">PIL.IcoImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.JpegImagePlugin">PIL.JpegImagePlugin</a>
  &#8226;   <a href="#PIL.PngImagePlugin">PIL.PngImagePlugin</a>
  &#8226;   <a href="#PIL.TgaImagePlugin">PIL.TgaImagePlugin</a>

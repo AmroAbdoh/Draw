@@ -81,7 +81,7 @@ class AnnotatorInputMixin:
 
         def on_move(x, y):
             if self._mouse_down:
-                self.root.after(0, self._handle_hook_move, x, y)
+                self._queue_mouse_move(x, y)
 
         self.mouse_listener = self._pynput_mouse.Listener(
             on_click=on_click,
@@ -113,6 +113,31 @@ class AnnotatorInputMixin:
             return
         self._mouse_down = True
         self.on_press(x, y)
+
+    def _queue_mouse_move(self, x, y):
+        with self._move_lock:
+            self._pending_move = (x, y)
+            if self._move_callback_pending:
+                return
+            self._move_callback_pending = True
+        self.root.after_idle(self._process_mouse_move)
+
+    def _process_mouse_move(self):
+        while True:
+            with self._move_lock:
+                point = self._pending_move
+                self._pending_move = None
+            if point is None:
+                with self._move_lock:
+                    if self._pending_move is None:
+                        self._move_callback_pending = False
+                        return
+                    continue
+            self._handle_hook_move(*point)
+            with self._move_lock:
+                if self._pending_move is None:
+                    self._move_callback_pending = False
+                    return
 
     def _handle_hook_move(self, x, y):
         if self.tool == "pointer" or not self._mouse_down:

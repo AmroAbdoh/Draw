@@ -37,6 +37,11 @@ class AnnotatorDrawingMixin:
                 x, y, x, y, outline=self.color, width=self.size,
             )
 
+        elif self.tool == "rectangle":
+            self.current_item = self.canvas.create_rectangle(
+                x, y, x, y, outline=self.color, width=self.size,
+            )
+
         elif self.tool == "eraser":
             self.erase_at(x, y)
         elif self.tool == "text":
@@ -46,9 +51,13 @@ class AnnotatorDrawingMixin:
 
     def on_drag(self, x, y):
         if self.tool in ("pencil", "highlighter") and self.current_item is not None:
+            if self.current_points:
+                last_x, last_y = self.current_points[-2:]
+                if (x - last_x) ** 2 + (y - last_y) ** 2 < 4:
+                    return
             self.current_points.extend([x, y])
             self.canvas.coords(self.current_item, *self.current_points)
-        elif self.tool in ("line", "circle") and self.current_item is not None:
+        elif self.tool in ("line", "circle", "rectangle") and self.current_item is not None:
             self.canvas.coords(self.current_item, self.start_x, self.start_y, x, y)
         elif self.tool == "eraser":
             self.erase_at(x, y)
@@ -61,7 +70,7 @@ class AnnotatorDrawingMixin:
             self.drag_data = {"x": x, "y": y}
 
     def on_release(self, x, y):
-        if self.tool in ("pencil", "highlighter", "line", "circle") and self.current_item is not None:
+        if self.tool in ("pencil", "highlighter", "line", "circle", "rectangle") and self.current_item is not None:
             item = self.current_item
             self.current_item = None
             self.current_points = []
@@ -167,6 +176,12 @@ class AnnotatorDrawingMixin:
                 "width": self.canvas.itemcget(item, "width"),
                 "fill": self.canvas.itemcget(item, "fill"),
             }
+        elif item_type == "rectangle":
+            config = {
+                "outline": self.canvas.itemcget(item, "outline"),
+                "width": self.canvas.itemcget(item, "width"),
+                "fill": self.canvas.itemcget(item, "fill"),
+            }
         else:
             config = {}
         return {"type": item_type, "coords": coords, "cfg": config}
@@ -188,6 +203,11 @@ class AnnotatorDrawingMixin:
             )
         if item_type == "oval":
             return self.canvas.create_oval(
+                *coords, outline=config["outline"], width=config["width"],
+                fill=config["fill"],
+            )
+        if item_type == "rectangle":
+            return self.canvas.create_rectangle(
                 *coords, outline=config["outline"], width=config["width"],
                 fill=config["fill"],
             )

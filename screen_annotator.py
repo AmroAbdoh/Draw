@@ -2,12 +2,15 @@
 """Entry point for the screen annotation tool."""
 
 import sys
+import threading
 import tkinter as tk
 from tkinter import messagebox
 
 from annotator_config import CURSOR_MAP, DRAWING_TOOLS, TOOLS_GRID
 from annotator_drawing import AnnotatorDrawingMixin
 from annotator_input import AnnotatorInputMixin
+from annotator_settings import load_settings, save_settings
+from annotator_tray import AnnotatorTrayMixin
 from annotator_ui import AnnotatorUIMixin
 
 IS_WINDOWS = sys.platform.startswith("win")
@@ -28,6 +31,7 @@ class ScreenAnnotator(
     AnnotatorUIMixin,
     AnnotatorInputMixin,
     AnnotatorDrawingMixin,
+    AnnotatorTrayMixin,
 ):
     """Coordinate application state across the UI, input, and drawing layers."""
 
@@ -43,9 +47,11 @@ class ScreenAnnotator(
         self.root = tk.Tk()
         self.root.withdraw()
 
+        settings = load_settings()
         self.tool = "pencil"
-        self.color = "#ff2d55"
-        self.size = 4
+        self.color = settings["color"]
+        self.size = settings["size"]
+        self.settings_ready = False
 
         self.history = []
         self.redo_stack = []
@@ -59,17 +65,25 @@ class ScreenAnnotator(
 
         self.tool_buttons = {}
         self._mouse_down = False
+        self._move_lock = threading.Lock()
+        self._pending_move = None
+        self._move_callback_pending = False
         self.mouse_listener = None
         self.keyboard_listener = None
+        self.tray_icon = None
 
         self._build_overlay()
         self._build_toolbar()
+        self.settings_ready = True
         self.set_tool(self.tool)
 
         if self.HAVE_PYNPUT:
             self._start_mouse_hook()
         self._keep_toolbar_on_top()
         self._report_mode()
+
+    def save_user_settings(self):
+        save_settings(self.color, self.size)
 
     def _report_mode(self):
         print(f"[screen_annotator] python executable: {sys.executable}")
@@ -93,6 +107,8 @@ class ScreenAnnotator(
         )
 
     def exit_app(self):
+        self.save_user_settings()
+        self._stop_tray()
         for listener in (self.mouse_listener, self.keyboard_listener):
             if listener is not None:
                 try:

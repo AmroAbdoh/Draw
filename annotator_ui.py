@@ -70,15 +70,15 @@ class AnnotatorUIMixin:
 
         mode_text = "Full transparency" if self.HAVE_PYNPUT else "Fallback mode"
         mode_color = "#3ad46b" if self.HAVE_PYNPUT else "#e0a030"
-        tk.Label(
-            frame, text=mode_text, bg="#1e1e1e", fg=mode_color, font=("Segoe UI", 8)
-        ).grid(row=0, column=1, sticky="e", pady=(0, 6))
-
         self.color_btn = tk.Button(
             frame, bg=self.color, activebackground=self.color,
-            width=14, height=2, relief="flat", command=self.choose_color,
+            width=3, height=1, relief="flat", bd=1, command=self.choose_color,
         )
-        self.color_btn.grid(row=1, column=0, columnspan=2, sticky="ew", pady=(0, 10))
+        self.color_btn.grid(row=0, column=1, sticky="e", padx=(8, 0), pady=(0, 4))
+
+        tk.Label(
+            frame, text=mode_text, bg="#1e1e1e", fg=mode_color, font=("Segoe UI", 7)
+        ).grid(row=1, column=0, columnspan=2, sticky="ew", pady=(0, 5))
 
         btn_font = ("Segoe UI", 11, "bold")
         for idx, (label, name, tooltip) in enumerate(self.TOOLS_GRID):
@@ -135,7 +135,7 @@ class AnnotatorUIMixin:
             "redo": self.redo,
             "clear": self.clear_all,
             "save": self.save_image,
-            "exit": self.exit_app,
+            "hide": self.hide_app,
         }[name]
 
     def set_tool(self, name):
@@ -155,6 +155,8 @@ class AnnotatorUIMixin:
 
     def set_size(self, val):
         self.size = max(1, int(float(val)))
+        if hasattr(self, "settings_ready") and self.settings_ready:
+            self.save_user_settings()
 
     def _adjust_size(self, direction):
         new_size = min(50, max(1, self.size + direction))
@@ -165,3 +167,4 @@ class AnnotatorUIMixin:
         if hexcolor:
             self.color = hexcolor
             self.color_btn.config(bg=hexcolor, activebackground=hexcolor)
+            self.save_user_settings()
