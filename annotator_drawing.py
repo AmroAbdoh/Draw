@@ -144,6 +144,8 @@ class AnnotatorDrawingMixin:
 
     def select_at(self, x, y):
         self._delete_selection_visuals()
+        self._resize_orig_coords = None
+        self._resize_orig_bbox = None
         found = [
             item for item in self.canvas.find_overlapping(x - 4, y - 4, x + 4, y + 4)
             if "selection_box" not in self.canvas.gettags(item)
@@ -201,12 +203,17 @@ class AnnotatorDrawingMixin:
             if handle in self.canvas.find_overlapping(x, y, x, y):
                 self.resize_handle = handle
                 self.selected_orig_coords = self.canvas.coords(self.selected_item)
+                # Snapshot the untouched shape once - every resize step
+                # scales from THIS, never from the last scaled result.
+                self._resize_orig_coords = list(self.selected_orig_coords)
+                self._resize_orig_bbox = self.canvas.bbox(self.selected_item)
                 self.drag_data = {"x": x, "y": y}
                 return True
         return False
 
+    MIN_RESIZE_SIZE = 4
     def _resize_selected(self, x, y):
-        bbox = self.canvas.bbox(self.selected_item)
+        bbox = self._resize_orig_bbox
         if not bbox:
             return
         handle_index = self.resize_handles.index(self.resize_handle)
@@ -215,11 +222,33 @@ class AnnotatorDrawingMixin:
             (bbox[0], bbox[1]), (bbox[2], bbox[1]),
         )
         anchor_x, anchor_y = anchors[handle_index]
-        width = max(2, abs(x - anchor_x))
-        height = max(2, abs(y - anchor_y))
+
+        # Which side of the anchor this handle originally sat on. Handles
+        # 1 (top-right) and 2 (bottom-right) start to the RIGHT of their
+        # anchor; 0 (top-left) and 3 (bottom-left) start to the LEFT.
+        # Same idea vertically. Used to stop the cursor crossing over the
+        # anchor line - that crossing is what caused the "shrinks to a
+        # line, then grows again" bug.
+        sign_x = 1 if handle_index in (1, 2) else -1
+        sign_y = 1 if handle_index in (2, 3) else -1
+
+        if sign_x > 0:
+            x = max(x, anchor_x + self.MIN_RESIZE_SIZE)
+        else:
+            x = min(x, anchor_x - self.MIN_RESIZE_SIZE)
+        if sign_y > 0:
+            y = max(y, anchor_y + self.MIN_RESIZE_SIZE)
+        else:
+            y = min(y, anchor_y - self.MIN_RESIZE_SIZE)
+
+        width = abs(x - anchor_x)
+        height = abs(y - anchor_y)
         scale_x = width / max(1, bbox[2] - bbox[0])
         scale_y = height / max(1, bbox[3] - bbox[1])
+
+        self.canvas.coords(self.selected_item, *self._resize_orig_coords)
         self.canvas.scale(self.selected_item, anchor_x, anchor_y, scale_x, scale_y)
+
         self._delete_selection_visuals()
         new_bbox = self.canvas.bbox(self.selected_item)
         if new_bbox:
