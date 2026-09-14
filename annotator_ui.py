@@ -250,8 +250,94 @@ class AnnotatorUIMixin:
         self.size_slider.set(new_size)
 
     def choose_color(self):
-        rgb, hexcolor = colorchooser.askcolor(color=self.color, title="Choose color")
-        if hexcolor:
-            self.color = hexcolor
-            self.color_btn.config(bg=hexcolor, activebackground=hexcolor)
-            self.save_user_settings()
+        self._tool_before_color = self.tool
+        self.set_tool("pointer")
+        self._show_color_popup()
+
+    def _show_color_popup(self):
+        # Close any existing popup first
+        existing = getattr(self, "_color_popup", None)
+        if existing is not None:
+            try:
+                existing.destroy()
+            except Exception:
+                pass
+
+        popup = tk.Toplevel(self.toolbar)
+        popup.overrideredirect(True)
+        popup.attributes("-topmost", True)
+        popup.config(bg="#1e1e1e")
+        self._color_popup = popup
+
+        x = self.color_btn.winfo_rootx() + self.color_btn.winfo_width() + 8
+        y = self.color_btn.winfo_rooty()
+        popup.geometry(f"+{x}+{y}")
+
+        frame = tk.Frame(popup, bg="#1e1e1e", padx=8, pady=8,
+                          highlightthickness=1, highlightbackground="#3a3a3a")
+        frame.pack()
+
+        tk.Label(frame, text="COLOR", bg="#1e1e1e", fg="#3a7bd5",
+                 font=("Segoe UI", 9, "bold")).grid(row=0, column=0, columnspan=6, sticky="w", pady=(0, 6))
+
+        swatches = [
+            "#ff3b30", "#ff9500", "#ffcc00", "#34c759", "#00c7be",
+            "#30b0ff", "#007aff", "#5856d6", "#af52de", "#ff2d55",
+            "#ffffff", "#8e8e93", "#48484a", "#1c1c1e", "#000000",
+        ]
+        cols = 5
+        for i, hexcolor in enumerate(swatches):
+            r, c = i // cols, i % cols
+            sw = tk.Button(
+                frame, bg=hexcolor, activebackground=hexcolor,
+                width=3, height=1, relief="flat", bd=0,
+                highlightthickness=1, highlightbackground="#3a3a3a",
+                command=lambda hc=hexcolor: self._apply_color(hc),
+            )
+            sw.grid(row=1 + r, column=c, padx=2, pady=2)
+
+        hex_row = 1 + (len(swatches) + cols - 1) // cols
+        tk.Label(frame, text="Hex:", bg="#1e1e1e", fg="white",
+                 font=("Segoe UI", 8)).grid(row=hex_row, column=0, sticky="w", pady=(8, 0))
+
+        hex_var = tk.StringVar(value=self.color)
+        entry = tk.Entry(frame, textvariable=hex_var, width=10, bg="#2b2b2b",
+                          fg="white", insertbackground="white", relief="flat")
+        entry.grid(row=hex_row, column=1, columnspan=3, sticky="ew", pady=(8, 0))
+
+        def apply_hex(event=None):
+            val = hex_var.get().strip()
+            if not val.startswith("#"):
+                val = "#" + val
+            try:
+                popup.winfo_rgb(val)  # validates the color string
+                self._apply_color(val)
+            except tk.TclError:
+                entry.config(bg="#4a2222")
+
+        entry.bind("<Return>", apply_hex)
+        tk.Button(frame, text="OK", font=("Segoe UI", 8), bg="#2b2b2b", fg="white",
+                  relief="flat", command=apply_hex).grid(row=hex_row, column=4, sticky="ew", pady=(8, 0))
+
+        popup.bind("<FocusOut>", lambda e: self._close_color_popup())
+        popup.focus_set()
+
+    def _apply_color(self, hexcolor):
+        self.color = hexcolor
+        self.color_btn.config(bg=hexcolor, activebackground=hexcolor)
+        self.save_user_settings()
+        self._close_color_popup()
+
+    def _close_color_popup(self):
+        popup = getattr(self, "_color_popup", None)
+        if popup is not None:
+            try:
+                popup.destroy()
+            except Exception:
+                pass
+            self._color_popup = None
+
+        prev_tool = getattr(self, "_tool_before_color", None)
+        if prev_tool is not None:
+            self.set_tool(prev_tool)
+            self._tool_before_color = None
