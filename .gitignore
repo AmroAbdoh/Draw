@@ -1,6 +1,6 @@
 # --- PyInstaller build output (regenerated every build, don't commit) ---
 build/
-
+dist/
 
 # --- Python cache/bytecode ---
 __pycache__/

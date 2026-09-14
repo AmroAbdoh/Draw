@@ -4,6 +4,8 @@ import os
 import sys
 import tkinter as tk
 from tkinter import colorchooser
+import colorsys
+import math
 
 from PIL import Image, ImageOps, ImageTk
 
@@ -254,8 +256,29 @@ class AnnotatorUIMixin:
         self.set_tool("pointer")
         self._show_color_popup()
 
+    def _get_color_wheel_photo(self, size=140):
+        if getattr(self, "_wheel_photo", None) is not None and getattr(self, "_wheel_size", None) == size:
+            return self._wheel_photo
+        img = Image.new("RGB", (size, size), "#1e1e1e")
+        pixels = img.load()
+        cx = cy = size / 2
+        radius = size / 2 - 1
+        for y in range(size):
+            for x in range(size):
+                dx, dy = x - cx, y - cy
+                dist = math.hypot(dx, dy)
+                if dist <= radius:
+                    angle = math.atan2(dy, dx)
+                    hue = (angle / (2 * math.pi)) % 1.0
+                    sat = min(dist / radius, 1.0)
+                    r, g, b = colorsys.hsv_to_rgb(hue, sat, 1.0)
+                    pixels[x, y] = (int(r * 255), int(g * 255), int(b * 255))
+        self._wheel_img = img  # keep a ref so it isn't garbage collected
+        self._wheel_photo = ImageTk.PhotoImage(img)
+        self._wheel_size = size
+        return self._wheel_photo
+
     def _show_color_popup(self):
-        # Close any existing popup first
         existing = getattr(self, "_color_popup", None)
         if existing is not None:
             try:
@@ -278,32 +301,30 @@ class AnnotatorUIMixin:
         frame.pack()
 
         tk.Label(frame, text="COLOR", bg="#1e1e1e", fg="#3a7bd5",
-                 font=("Segoe UI", 9, "bold")).grid(row=0, column=0, columnspan=6, sticky="w", pady=(0, 6))
+                 font=("Segoe UI", 9, "bold")).grid(row=0, column=0, columnspan=3, sticky="w", pady=(0, 6))
 
-        swatches = [
-            "#ff3b30", "#ff9500", "#ffcc00", "#34c759", "#00c7be",
-            "#30b0ff", "#007aff", "#5856d6", "#af52de", "#ff2d55",
-            "#ffffff", "#8e8e93", "#48484a", "#1c1c1e", "#000000",
-        ]
-        cols = 5
-        for i, hexcolor in enumerate(swatches):
-            r, c = i // cols, i % cols
-            sw = tk.Button(
-                frame, bg=hexcolor, activebackground=hexcolor,
-                width=3, height=1, relief="flat", bd=0,
-                highlightthickness=1, highlightbackground="#3a3a3a",
-                command=lambda hc=hexcolor: self._apply_color(hc),
-            )
-            sw.grid(row=1 + r, column=c, padx=2, pady=2)
+        size = 140
+        photo = self._get_color_wheel_photo(size)
+        wheel = tk.Canvas(frame, width=size, height=size, bg="#1e1e1e", highlightthickness=0)
+        wheel.create_image(size / 2, size / 2, image=photo)
+        wheel.image = photo
+        wheel.grid(row=1, column=0, columnspan=3, pady=(0, 8))
 
-        hex_row = 1 + (len(swatches) + cols - 1) // cols
-        tk.Label(frame, text="Hex:", bg="#1e1e1e", fg="white",
-                 font=("Segoe UI", 8)).grid(row=hex_row, column=0, sticky="w", pady=(8, 0))
+        # starting hue/sat/val from the current color
+        r = int(self.color[1:3], 16) / 255
+        g = int(self.color[3:5], 16) / 255
+        b = int(self.color[5:7], 16) / 255
+        self._picker_h, self._picker_s, self._picker_v = colorsys.rgb_to_hsv(r, g, b)
+        self._pending_color = self.color
+
+        preview = tk.Label(frame, width=3, height=1, bg=self.color, relief="flat",
+                            highlightthickness=1, highlightbackground="#3a3a3a")
+        preview.grid(row=2, column=0, padx=(0, 8), sticky="w")
 
         hex_var = tk.StringVar(value=self.color)
-        entry = tk.Entry(frame, textvariable=hex_var, width=10, bg="#2b2b2b",
+        entry = tk.Entry(frame, textvariable=hex_var, width=9, bg="#2b2b2b",
                           fg="white", insertbackground="white", relief="flat")
-        entry.grid(row=hex_row, column=1, columnspan=3, sticky="ew", pady=(8, 0))
+        entry.grid(row=2, column=1, sticky="ew", padx=(0, 8))
 
         def apply_hex(event=None):
             val = hex_var.get().strip()
@@ -315,11 +336,54 @@ class AnnotatorUIMixin:
             except tk.TclError:
                 entry.config(bg="#4a2222")
 
-        entry.bind("<Return>", apply_hex)
         tk.Button(frame, text="OK", font=("Segoe UI", 8), bg="#2b2b2b", fg="white",
-                  relief="flat", command=apply_hex).grid(row=hex_row, column=4, sticky="ew", pady=(8, 0))
+                  relief="flat", command=apply_hex).grid(row=2, column=2, sticky="ew")
 
-        popup.bind("<FocusOut>", lambda e: self._close_color_popup())
+        tk.Label(frame, text="Bright", bg="#1e1e1e", fg="white",
+                 font=("Segoe UI", 8)).grid(row=3, column=0, sticky="w", pady=(8, 0))
+        bright_slider = tk.Scale(
+            frame, from_=0, to=100, orient="horizontal", bg="#1e1e1e", fg="white",
+            highlightthickness=0, troughcolor="#3a3a3a", length=110, showvalue=False,
+        )
+        bright_slider.set(int(self._picker_v * 100))
+        bright_slider.grid(row=3, column=1, columnspan=2, sticky="ew", pady=(8, 0))
+
+        def update_pending():
+            r, g, b = colorsys.hsv_to_rgb(self._picker_h, self._picker_s, self._picker_v)
+            hexcolor = "#{:02x}{:02x}{:02x}".format(int(r * 255), int(g * 255), int(b * 255))
+            preview.config(bg=hexcolor)
+            hex_var.set(hexcolor)
+            self._pending_color = hexcolor
+
+        def wheel_pick(event):
+            dx, dy = event.x - size / 2, event.y - size / 2
+            radius = size / 2 - 1
+            dist = min(math.hypot(dx, dy), radius)
+            angle = math.atan2(dy, dx)
+            self._picker_h = (angle / (2 * math.pi)) % 1.0
+            self._picker_s = dist / radius if radius else 0
+            update_pending()
+
+        def on_brightness(val):
+            self._picker_v = float(val) / 100
+            update_pending()
+
+        wheel.bind("<Button-1>", wheel_pick)
+        wheel.bind("<B1-Motion>", wheel_pick)
+        bright_slider.config(command=on_brightness)
+        entry.bind("<Return>", apply_hex)
+
+        def check_focus():
+            # Only close if focus actually left the popup entirely - not
+            # just moved to one of its own children (like clicking into
+            # the hex entry, which used to trigger an immediate close).
+            if not self._color_popup:
+                return
+            focused = popup.focus_get()
+            if focused is None or str(focused).find(str(popup)) != 0:
+                self._close_color_popup()
+
+        popup.bind("<FocusOut>", lambda e: popup.after(50, check_focus))
         popup.focus_set()
 
     def _apply_color(self, hexcolor):
